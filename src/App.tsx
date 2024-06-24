@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Desk from "./Desk";
-import BookingForm from "./BookingForm";
 import Dashboard from "./Dashbaord";
 
 const App: React.FC = () => {
@@ -23,17 +22,6 @@ const App: React.FC = () => {
     { id: 14, type: "team", booked: false },
     { id: 15, type: "team", booked: false },
   ]);
-
-  const markDesk = (type: string) => {
-    const deskType = desks.filter(
-      (desk) => desk.type == type && desk.booked == false
-    );
-    if (deskType.length === 0) {
-      alert("no booking space");
-    } else {
-      handleDeskClick;
-    }
-  };
 
   const [totalRevenue, setTotalRevenue] = useState<number>(0);
 
