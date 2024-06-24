@@ -1,30 +1,6 @@
-// import React from "react";
-// import classNames from "classnames";
-
-// interface DeskProps {
-//   type: "individual" | "team";
-//   booked: boolean;
-//   onClick: () => void;
-// }
-
-// const Desk: React.FC<DeskProps> = ({ type, booked, onClick }) => {
-//   const deskClasses = classNames("desk", "p-4", "rounded", "cursor-pointer", {
-//     "bg-red-500": booked,
-//     "bg-green-500": !booked,
-//     "text-white": true,
-//   });
-
-//   return (
-//     <div className={deskClasses} onClick={onClick}>
-//       {type === "individual" ? "Individual Desk" : "Team Desk"}
-//     </div>
-//   );
-// };
-
-// export default Desk;
-
 import React, { useState } from "react";
 import classNames from "classnames";
+import { currencyFormatter } from "./util";
 
 interface DeskProps {
   id: number;
@@ -51,17 +27,17 @@ const Desk: React.FC<DeskProps> = ({ id, type, booked, onClick }) => {
   };
 
   const calculateTotalCharge = () => {
-    let rate = type === "team" ? 25 : membershipRates["Basic"]; // Default to Basic rate for individual desks
+    let rate = type === "team" ? 25 : membershipRates["Basic"];
     if (type === "individual") {
       if (bookingHours > 3) {
-        rate = rate * bookingHours * 0.9; // Apply 10% discount for bookings > 3 hours
+        rate = rate * bookingHours * 0.9;
       } else {
         rate = rate * bookingHours;
       }
     } else {
-      rate = 25 * bookingHours; // Fixed rate for team desks
+      rate = 25 * bookingHours;
     }
-    return rate.toFixed(2); // Format to 2 decimal places
+    return rate.toFixed(2);
   };
 
   const deskClasses = classNames("desk", "p-4", "rounded", "cursor-pointer", {
@@ -78,7 +54,7 @@ const Desk: React.FC<DeskProps> = ({ id, type, booked, onClick }) => {
           <input
             type="number"
             min="1"
-            max="24" // Assuming maximum booking duration is 24 hours
+            max="24"
             value={bookingHours}
             onChange={handleBookingHoursChange}
             className="mr-2 p-2 border border-gray-300 rounded"
@@ -90,7 +66,8 @@ const Desk: React.FC<DeskProps> = ({ id, type, booked, onClick }) => {
       )}
       {booked && (
         <div className="text-sm mt-2">
-          Booked for {bookingHours} hour(s). Total: ${calculateTotalCharge()}
+          Booked for {bookingHours} hour(s). Total:{" "}
+          {currencyFormatter.format(calculateTotalCharge())}
         </div>
       )}
     </div>
