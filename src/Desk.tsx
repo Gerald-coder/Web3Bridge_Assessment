@@ -26,7 +26,7 @@ const Desk: React.FC<DeskProps> = ({ id, type, booked, onClick }) => {
     setBookingHours(hours);
   };
 
-  const calculateTotalCharge = () => {
+  const calculateTotalCharge = (): number => {
     let rate = type === "team" ? 25 : membershipRates["Basic"];
     if (type === "individual") {
       if (bookingHours > 3) {
@@ -37,7 +37,7 @@ const Desk: React.FC<DeskProps> = ({ id, type, booked, onClick }) => {
     } else {
       rate = 25 * bookingHours;
     }
-    return rate.toFixed(2);
+    return parseFloat(rate.toFixed(2)); // Ensure rate is returned as a number
   };
 
   const deskClasses = classNames("desk", "p-4", "rounded", "cursor-pointer", {

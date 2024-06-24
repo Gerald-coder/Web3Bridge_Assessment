@@ -1,5 +1,4 @@
 import { currencyFormatter } from "./util";
-
 import React from "react";
 
 interface DashboardProps {
@@ -11,7 +10,7 @@ const Dashboard: React.FC<DashboardProps> = ({ totalRevenue }) => {
     <div className="dashboard mt-8">
       <h2 className="text-xl font-bold mb-4">Revenue Dashboard</h2>
       <div className="text-lg">
-        Total Revenue: {currencyFormatter.format(totalRevenue.toFixed(2))}
+        Total Revenue: {currencyFormatter.format(totalRevenue)}
       </div>
     </div>
   );

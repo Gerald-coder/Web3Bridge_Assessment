@@ -4,7 +4,7 @@ import Dashboard from "./Dashbaord";
 
 const App: React.FC = () => {
   const [desks, setDesks] = useState<
-    { id: number; type: string; booked: boolean }[]
+    { id: number; type: "individual" | "team"; booked: boolean }[]
   >([
     { id: 1, type: "individual", booked: false },
     { id: 2, type: "individual", booked: false },
@@ -47,6 +47,7 @@ const App: React.FC = () => {
     const revenue = calculateTotalRevenue();
     setTotalRevenue(revenue);
   }, [desks]);
+
   return (
     <div className="App">
       <h1 className="text-3xl font-bold mb-4">
